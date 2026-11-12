@@ -48,6 +48,15 @@
     <None Update="launchersettings.json" CopyToOutputDirectory="Always" />
 
     <!--
+      The launcher and client both provide the same default texture-pack files.
+      Those contents are merged into the same publish output directory by the
+      project reference, so removing the launcher's duplicate copy avoids
+      NETSDK1152 during publish while keeping the client copy available for the
+      launched game process.
+    -->
+    <None Remove="Content\default-pack.*" />
+
+    <!--
       Link the Iguina.LowResTheme sibling directory into the launcher's output
       at the path LauncherGame.LoadContent expects (IguinaTheme/system_style.json).
       The theme is a self-contained pile of PNGs + Iguina JSON stylesheets;
